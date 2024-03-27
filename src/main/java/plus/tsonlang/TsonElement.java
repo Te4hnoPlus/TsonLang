@@ -3,7 +3,6 @@ package plus.tsonlang;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import plus.tsonlang.TsonLang;
 
 
 public class TsonElement extends IElementType {

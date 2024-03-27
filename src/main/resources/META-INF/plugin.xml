@@ -1,21 +1,12 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>plus.tsonlang</id>
-
-
     <name>Tson Configuration's Lang</name>
     <vendor email="te4hnopublic@yandex.com">Te4hnoPlus</vendor>
 
-
     <description><![CDATA[Tson Configuration's lang by Te4hnoPlus ...]]></description>
-
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <fileType
                 name="Tson file"
@@ -25,5 +16,8 @@
                 extensions="tson"/>
 
         <lang.syntaxHighlighterFactory language="Tson" implementationClass="plus.tsonlang.TsonSyntaxHighlighterFactory"/>
+
+        <!-- TODO FIX THIS-->
+        <additionalTextAttributes scheme="Darcula" file="resources/colors/TsonColor.xml"/>
     </extensions>
 </idea-plugin>
