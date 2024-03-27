@@ -1,0 +1,26 @@
+{
+show404=(true),
+
+cache="sql:root:cache.cac",
+domains={
+	lochost.ru={
+		use-lets-encrypt=(true),
+	    auth={
+			class="plus.mcapi.McAuth",
+			mail={
+				virtual=(true)
+			}
+		},
+		domains=["te4hno.ddns.net"],
+		clients-plug-data={
+			type='memory',
+			parent='root:clients'
+		},
+		routes={
+			assets/etc={type="svg",  headers={access-control-allow-origin='*'}},
+			assets/tms={type="html", headers={access-control-allow-origin='*'}},
+			launch={type="files", cache=(3600)},
+			tweak={type="files", headers={content-type="application/json; charset=UTF-8"}, cache=(10)}
+		}
+	}
+}}

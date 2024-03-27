@@ -16,11 +16,11 @@ public class TsonSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
     @NotNull
     @Override
     public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
-        return new TsonHighliner();
+        return new TsonHighLiner();
     }
 
 
-    private static class TsonHighliner extends SyntaxHighlighterBase {
+    private static class TsonHighLiner extends SyntaxHighlighterBase {
         @Override
         public @NotNull Lexer getHighlightingLexer() {
             return new TsonLexer.Adapter();
@@ -28,10 +28,8 @@ public class TsonSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
 
 
         @Override
-        public TextAttributesKey @NotNull [] getTokenHighlights(IElementType type) {
-            if(type instanceof TsonElToken){
-                return ((TsonElToken) type).get();
-            }
+        public @NotNull TextAttributesKey[] getTokenHighlights(IElementType type) {
+            if(type instanceof TsonElToken) return ((TsonElToken) type).get();
             return TsonElToken.EMPTY.get();
         }
     }

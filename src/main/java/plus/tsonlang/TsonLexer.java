@@ -12,11 +12,13 @@ public class TsonLexer implements FlexLexer {
             super(new TsonLexer());
         }
     }
+
     private CharSequence buf;
-    private int startBuf, endBuf, state;
+    private int startBuf, endBuf;
     private int startToken = 0, endToken = 0;
     private int cursor = 0;
     private int flag = 0;
+    private int yyState = 0;
 
     @Override
     public void reset(CharSequence buf, int start, int end, int initialState) {
@@ -29,12 +31,12 @@ public class TsonLexer implements FlexLexer {
         this.endToken = 0;
     }
 
+
     private boolean isSpace(char c){
         return c == ' ' || c == '\t' || c == '\n' || c == '\r';
     }
 
 
-    private int yyState = 0;
     @Override
     public void yybegin(int state) {
         this.yyState = state;

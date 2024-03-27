@@ -27,7 +27,7 @@ public class TsonElToken extends TsonElement {
     public static TsonElToken CLASS           = new TsonElToken("Class", FUNCTION_DECLARATION);
     public static TsonElToken BOOLEAN         = new TsonElToken("Boolean", DefaultLanguageHighlighterColors.COMMA);
 
-    public static TsonElToken COMMA = new TsonElToken("Comma", DefaultLanguageHighlighterColors.COMMA);//
+    public static TsonElToken COMMA = new TsonElToken("Comma", DefaultLanguageHighlighterColors.COMMA);
     public static TsonElToken KEY_SEPARATOR = new TsonElToken("Separator", DOC_COMMENT_TAG_VALUE);
 
     //HIGHLIGHTED_REFERENCE нижняя черта
