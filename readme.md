@@ -43,28 +43,28 @@
 > ![alt text](files/preview_ping.png)
 > ```java
 > {listeners=[
-> 	<(msg), {
-> 		cansel=(false), priority=(10),
-> 		filter={
-> 			type="stw", msg="!ping"
-> 		},
-> 		msg=".. pong!"
-> 	}>,
-> 	<(msg), {
-> 		cansel=(false), priority=(10),
-> 		filter={
-> 			type="stw", msg="Ирис, признайся"
-> 		},
-> 		msg="Я :heart: свою сестренку <@652560611024306197>"
-> 	}>,
-> 	<(msg), {
-> 		cansel=(false), priority=(10),
-> 		filter={
-> 			type="stw", msg="!ава"
-> 		},
-> 		msg={
-> 			type="fm-msg",
-> 			msg=
+>    <(msg), {
+>       cansel=(false), priority=(10),
+>       filter={
+>          type="stw", msg="!ping"
+>       },
+>       msg=".. pong!"
+>    }>,
+>    <(msg), {
+>       cansel=(false), priority=(10),
+>       filter={
+>          type="stw", msg="Ирис, признайся"
+>       },
+>       msg="Я :heart: свою сестренку <@652560611024306197>"
+>    }>,
+>    <(msg), {
+>       cansel=(false), priority=(10),
+>       filter={
+>          type="stw", msg="!ава"
+>       },
+>       msg={
+>          type="fm-msg",
+>          msg=
 > "
 > > 
 > > Любуйся своей аватаркой, %user:name%
@@ -72,29 +72,29 @@
 > %user:ava_url%
 > "
 > 		}
-> 	}>,
-> 	<(msg), {
-> 		cansel=(false), priority=(10), reply=(true),
-> 		filter={
-> 			type="start-with", msg="#я люблю техника"
-> 		},
-> 		msg={
-> 			embeds=[{
-> 				title="Валькирия %user:name%",
-> 				img=["%user:ava_url%", "1024x1024"],
-> 				msg="признался(ась) в любви технику"
-> 			},{
-> 				title="От AIris: ",
-> 				msg=
+>    }>,
+>    <(msg), {
+>       cansel=(false), priority=(10), reply=(true),
+>       filter={
+>          type="start-with", msg="#я люблю техника"
+>       },
+>       msg={
+>          embeds=[{
+>             title="Валькирия %user:name%",
+>             img=["%user:ava_url%", "1024x1024"],
+>             msg="признался(ась) в любви технику"
+>          },{
+>             title="От AIris: ",
+>             msg=
 > "
 > > 
 > > От всей души желаю тебе заполучить
 > > ответную любовь от техника
 > > *
 > "
-> 			}]
-> 		}
-> 	}>
+>          }]
+>       }
+>    }>
 > ]}
 > ```
 >
