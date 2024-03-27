@@ -43,4 +43,5 @@ tasks {
 }
 
 sourceSets["main"].java.srcDirs("src/main/gen")
+//to build load 'https://github.com/Te4hnoPlus/TsonConfigurations'
 sourceSets["main"].java.srcDirs("C:/Users/Te4hnoPlus/IdeaProjects/TsonConfigurations/src/main/java")
