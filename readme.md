@@ -7,7 +7,7 @@
 
 #### Пример 1
 > ![alt text](files/preview_config.png)
-> ```json
+> ```java
 > {
 > show404=(true),
 > 
@@ -41,7 +41,7 @@
 #### Пример 2
 
 > ![alt text](files/preview_ping.png)
-> ```json
+> ```java
 > {listeners=[
 > 	<(msg), {
 > 		cansel=(false), priority=(10),
