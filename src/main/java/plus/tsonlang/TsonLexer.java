@@ -20,16 +20,17 @@ public class TsonLexer implements FlexLexer {
 
     @Override
     public void reset(CharSequence buf, int start, int end, int initialState) {
+        flag = 0;
         this.cursor = 0;
         this.buf = buf;
-        this.startBuf = start;
+        this.startBuf = 0;//TODO Rewrite. Temporary fix critical error. `this.startBuf = start;`
         this.endBuf = end;
         this.startToken = 0;
         this.endToken = 0;
     }
 
     private boolean isSpace(char c){
-        return c == ' ' || c == '\t' || c == '\n';
+        return c == ' ' || c == '\t' || c == '\n' || c == '\r';
     }
 
 
@@ -60,9 +61,35 @@ public class TsonLexer implements FlexLexer {
 
     @Override
     public IElementType advance() throws IOException {
+        IElementType result = null;
+        //fix syntax errors
+        try {
+            result = process();
+        } catch (Exception e){
+            e.printStackTrace();
+            startToken = endToken = buf.length();
+            flag = 0;
+            cursor = 0;
+            return null;
+        }
+        if(startToken >= endToken || endToken > buf.length()){
+            startToken = endToken = buf.length();
+            flag = 0;
+            cursor = 0;
+            return null;
+        }
+        return result;
+    }
+
+
+    public IElementType process(){
         if(flag == 1){
             int pos = startBuf + cursor;
-            if(pos >= buf.length()) return null;
+            if(pos >= buf.length()) {
+                startToken = endToken = buf.length();
+                flag = 0;
+                return null;
+            }
             char c = buf.charAt(pos);
             if(c == '\'' || c == '"'){
                 flag = 0;
@@ -76,8 +103,7 @@ public class TsonLexer implements FlexLexer {
         } else {
             int pos = startBuf + cursor;
             if(pos >= buf.length()) return null;
-            if(goToChar())
-                return TsonElToken.EMPTY;
+            goToChar();
 
             char c = buf.charAt(pos);
 
@@ -100,7 +126,7 @@ public class TsonLexer implements FlexLexer {
                     flag = 1;
                     return pre(TsonElToken.STRING_BOUND);
                 }
-                default : return pre(TsonElToken.EMPTY       );
+                default : return pre(TsonElToken.EMPTY          );
             }
         }
         //return pre(TsonElToken.EMPTY);
@@ -126,7 +152,7 @@ public class TsonLexer implements FlexLexer {
         String result = buf.subSequence(startToken, endToken).toString();
 
         try {
-            double pre = Double.parseDouble(result.replace("_",""));
+            Double.parseDouble(result.replace("_",""));
             return TsonElToken.NUMBER;
         } catch (Exception ignored){}
         if(result.equalsIgnoreCase("true") || result.equalsIgnoreCase("false")){
@@ -172,11 +198,7 @@ public class TsonLexer implements FlexLexer {
             ++cursor;
             c = buf.charAt(startBuf + cursor);
         }
-        if(step){
-            startToken = startBuf + cursor;
-            ++cursor;
-            endToken   = startBuf + cursor;
-        }
+        if(step) --cursor;
         return step;
     }
 }

@@ -15,8 +15,8 @@ public class TsonElToken extends TsonElement {
     public static TsonElToken START_CLASS     = new TsonElToken("Start Class", FUNCTION_DECLARATION);
     public static TsonElToken END_CLASS       = new TsonElToken("End Class",   START_CLASS.key);
 
-    public static TsonElToken START_LIST      = new TsonElToken("Start List");
-    public static TsonElToken END_LIST        = new TsonElToken("End List"  );
+    public static TsonElToken START_LIST      = new TsonElToken("Start List", CONSTANT);
+    public static TsonElToken END_LIST        = new TsonElToken("End List"  , START_LIST.key);
 
     public static TsonElToken PRIMITIVE_START = new TsonElToken("Start Primitive", METADATA);
     public static TsonElToken PRIMITIVE_END   = new TsonElToken("End Primitive"  , PRIMITIVE_START.key);
