@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class TsonSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
+public final class TsonSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
     @NotNull
     @Override
     public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
@@ -20,15 +20,17 @@ public class TsonSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
     }
 
 
-    private static class TsonHighLiner extends SyntaxHighlighterBase {
+    private static final class TsonHighLiner extends SyntaxHighlighterBase {
+        @NotNull
         @Override
-        public @NotNull Lexer getHighlightingLexer() {
+        public Lexer getHighlightingLexer() {
             return new TsonLexer.Adapter();
         }
 
 
+        @NotNull
         @Override
-        public @NotNull TextAttributesKey[] getTokenHighlights(IElementType type) {
+        public TextAttributesKey[] getTokenHighlights(IElementType type) {
             if(type instanceof TsonElToken) return ((TsonElToken) type).get();
             return TsonElToken.EMPTY.get();
         }

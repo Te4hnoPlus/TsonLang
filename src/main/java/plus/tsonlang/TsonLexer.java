@@ -16,24 +16,18 @@ public class TsonLexer implements FlexLexer {
     private CharSequence buf;
     private int startBuf, endBuf;
     private int startToken = 0, endToken = 0;
+    private int flag = 0, yyState = 0;
     private int cursor = 0;
-    private int flag = 0;
-    private int yyState = 0;
 
     @Override
     public void reset(CharSequence buf, int start, int end, int initialState) {
         flag = 0;
         this.cursor = 0;
         this.buf = buf;
-        this.startBuf = 0;//TODO Rewrite. Temporary fix critical error. `this.startBuf = start;`
-        this.endBuf = end;
+        this.startBuf = 0;         //TODO Rewrite. Temporary fix critical error. `this.startBuf = start;`
+        this.endBuf = buf.length();//TODO Rewrite. Temporary fix critical error. `this.endBuf = end;`
         this.startToken = 0;
         this.endToken = 0;
-    }
-
-
-    private boolean isSpace(char c){
-        return c == ' ' || c == '\t' || c == '\n' || c == '\r';
     }
 
 
@@ -63,7 +57,7 @@ public class TsonLexer implements FlexLexer {
 
     @Override
     public IElementType advance() throws IOException {
-        IElementType result = null;
+        IElementType result;
         //fix syntax errors
         try {
             result = process();
@@ -84,7 +78,7 @@ public class TsonLexer implements FlexLexer {
     }
 
 
-    public IElementType process(){
+    protected IElementType process(){
         if(flag == 1){
             int pos = startBuf + cursor;
             if(pos >= buf.length()) {
@@ -135,6 +129,14 @@ public class TsonLexer implements FlexLexer {
     }
 
 
+    protected IElementType pre(IElementType res){
+        startToken = startBuf + cursor;
+        ++cursor;
+        endToken   = startBuf + cursor;
+        return res;
+    }
+
+
     private IElementType onPrimitive(){
         int start = cursor;
         char c = buf.charAt(startBuf + cursor);
@@ -166,8 +168,8 @@ public class TsonLexer implements FlexLexer {
 
     private void onStr(){
         int start = cursor;
-        char prev = buf.charAt(startBuf + cursor-1);
-        char c = buf.charAt(startBuf + cursor);
+        char prev = buf.charAt(startBuf + cursor-1),
+             c = buf.charAt(startBuf + cursor);
 
         while (c != prev && startBuf + cursor < endBuf){
             c = buf.charAt(startBuf + cursor);
@@ -183,14 +185,6 @@ public class TsonLexer implements FlexLexer {
     }
 
 
-    private IElementType pre(IElementType res){
-        startToken = startBuf + cursor;
-        ++cursor;
-        endToken   = startBuf + cursor;
-        return res;
-    }
-
-
     private boolean goToChar(){
         char c = buf.charAt(startBuf + cursor);
         boolean step = false;
@@ -202,5 +196,10 @@ public class TsonLexer implements FlexLexer {
         }
         if(step) --cursor;
         return step;
+    }
+
+
+    private boolean isSpace(char c){
+        return c == ' ' || c == '\t' || c == '\n' || c == '\r';
     }
 }

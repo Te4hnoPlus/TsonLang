@@ -1,5 +1,5 @@
 
-## Простой плагин на поддержку синтаксиса TsonConfigurations в Intelij IDEA
+## Простой плагин на поддержку синтаксиса [TsonConfigurations](https://github.com/Te4hnoPlus/TsonConfigurations) в Intelij IDEA
 
 ### Примеры внешнего вида и конфигураций в `files`
 
